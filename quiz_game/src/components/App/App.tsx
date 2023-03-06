@@ -9,13 +9,9 @@ const App: React.FC = () => {
     let [gameOver, setGameOver] = useState(false)
     let [results, setResults] = useState(0)
 
-    let summarizeAnswers = (value: number) => {
-        setResults(value)
-    }
-
     return (
         <div className="App">
-            <Game questions={quizQuestions} handleAnswers={summarizeAnswers} endGame={setGameOver}/>
+            {!gameOver && <Game questions={quizQuestions} countAnswers={setResults} isGameOver={setGameOver}/>}
             {gameOver && <Result results={results}/>}
         </div>
     );

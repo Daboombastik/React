@@ -10,7 +10,9 @@ const Result: React.FC<IResult> = (props) => {
         <div className="result">
             <img src="https://cdn-icons-png.flaticon.com/512/2278/2278992.png"  alt="img"/>
             <h2>{`You have answered ${props.results} out ${quizQuestions.length}`}</h2>
+            <a href="/">
             <button>Want to try again?</button>
+            </a>
         </div>
     );
 }

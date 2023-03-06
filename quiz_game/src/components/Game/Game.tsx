@@ -3,30 +3,30 @@ import {Question} from "../Questions/Questions";
 
 export interface GameCard {
     questions: Question[],
-    handleAnswers: (value: number) => void
-    endGame: (isEnd: boolean) => void
+    countAnswers: (value: number) => void
+    isGameOver: (value: boolean) => void
 }
 
-const Game: React.FC<GameCard> = ({questions, handleAnswers, endGame}) => {
+const Game: React.FC<GameCard> = ({questions, countAnswers, isGameOver}) => {
 
     let [index, setIndex] = useState(0)
     let [correctAnswers, setCorrectAnswers] = useState(0)
     let [percentage, setPercentage] = useState(0)
 
     const verifyAnswer = (event: any) => {
-        let answer = questions[index].answers.filter(e => e.text === event.target.innerText && e.isCorrect);
-        if (answer.length > 0) {
+        let answer = questions[index].answers.find(e => e.text === event.target.innerText && e.isCorrect);
+        if (answer) {
             setCorrectAnswers(++correctAnswers)
         }
 
         if (index === questions.length - 1) {
             setPercentage(100)
-            endGame(true)
+            isGameOver(true)
         } else {
             setIndex(++index)
             setPercentage(Math.round(index / questions.length * 100))
         }
-        handleAnswers(correctAnswers)
+        countAnswers(correctAnswers)
     }
 
     return (
